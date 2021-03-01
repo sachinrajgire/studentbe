@@ -1,10 +1,19 @@
 const express = require('express')
 const app = express()
 const port = process.env.PORT || 4000
-const data = require('./Student_Data.json')
+const data = require('./Student_Data.json');
+const { v4: uuidv4 } = require('uuid');
 
 app.get('/allrecords', (req, res) => {
-  res.send(data)
+  let  uuidData = data.map(i=>{
+    return {
+        ...i, 
+        Id: uuidv4()
+    }
+    
+    })
+
+  res.send(uuidData)
 })
 
 app.listen(port, () => {
