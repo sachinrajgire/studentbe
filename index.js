@@ -3,6 +3,8 @@ const app = express()
 const port = process.env.PORT || 4000
 const data = require('./Student_Data.json');
 const { v4: uuidv4 } = require('uuid');
+var cors = require('cors')
+app.use(cors())
 
 app.get('/allrecords', (req, res) => {
   let  uuidData = data.map(i=>{
