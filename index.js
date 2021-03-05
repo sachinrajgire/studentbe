@@ -22,22 +22,16 @@ let  uuidData = data.map(i=>{
  })
  
 
+ app.get('/recorddetails', (req, res) => {
+  console.log(req.query,'req.query')  //mention
+  let found= uuidData.find(i=>i.Id === req.query.Id)
+  console.log(found,'found');
+   res.send(found)
+})
 
 app.get('/allrecords', (req, res) => {
    res.send(uuidData)
 })
-
-app.get('/recorddetails', (req, res) => {
-  console.log(req.query,'req.query')  //mention
-  let filter= uuidData.filter(i=>i.Id === req.query.Id)
-  console.log(filter,'filter');
-   res.send(filter)
-})
-
-// app.get('/recorddetails/:id', (req, res) => {
-//   console.log(req.params,'req.params')  //mention
-
-// })
 
 
 app.get('/', function(req, res) {
