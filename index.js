@@ -3,8 +3,10 @@ const app = express()
 const port = process.env.PORT || 4000
 const data = require('./Student_Data.json');
 const { v4: uuidv4 } = require('uuid');
+const querystring = require('querystring');
 var cors = require('cors')
 var path = require('path');
+
 app.use(cors())
 
 
@@ -23,7 +25,12 @@ app.get('/allrecords', (req, res) => {
 
   res.send(uuidData)
 })
-app.get('/recordId', (req, res) => {
+app.get('/recorddetails/:id', (req, res) => {
+  
+  console.log(req.params,'req.params')
+
+  
+
   let  uuidData = data.map(i=>{
     return {
         ...i, 
@@ -34,6 +41,11 @@ app.get('/recordId', (req, res) => {
 
   res.send(uuidData)
 })
+
+
+
+
+
 
 
 app.listen(port, () => {
