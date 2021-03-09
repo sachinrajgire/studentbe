@@ -2,7 +2,7 @@
 
 const Company = require('../models/company.model');
 
-const createNewRecord = async (input) => {
+const createNewCompany = async (input) => {
  const {companyName} =input
   const company = await Company.create({
     companyName
@@ -52,7 +52,7 @@ const createNewRecord = async (input) => {
 //   res.sendFile(path.join(__dirname + '/send.html'));
 // });
 module.exports = {
-    createNewRecord,
+  createNewCompany,
    
   };
   
