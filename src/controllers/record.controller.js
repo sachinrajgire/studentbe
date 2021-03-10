@@ -3,29 +3,49 @@ const {recordService } = require('../services');
 const {companyService } = require('../services');
 
 const createNewRecord = async (req, res) => {
-const {companyName,careerUrl,universityName} =req.body
-const input ={
+const {companyName,careerUrl,universityName, graduationYear,
+  specialization,jobTitle,jobStartDate} 
+  =req.body
+
+const companyInput ={
   companyName,
-  careerUrl,
-  universityName
+  careerUrl
 }
-  const comp = await companyService.createNewCompany(input);
-  const rec = await recordService.createNewRecord({
-      companyName:comp._id,
-      universityName
-  });
-  console.log(rec,'rec from controller ')
-  console.log(comp,'comp from controller ')
-  res.status(httpStatus.CREATED).send(rec);
+let recordInput ={
+    universityName,
+    graduationYear,
+    specialization,
+    jobTitle,
+    jobStartDate
+}
+  const doCompanyExist= await companyService.searchCompanies({companyName});
+let newRecordInput
+if(doCompanyExist.length>0){
+  newRecordInput={...recordInput,company:doCompanyExist[0]._id}
+}
+else {
+  const comp = await companyService.createNewCompany(companyInput);
+  newRecordInput={...recordInput,company:comp._id}
+}
+
+const rec = await recordService.createNewRecord(newRecordInput);
+res.status(httpStatus.CREATED).send(rec);
 };
+
 
 const deleteRecord = async (req, res) => {
   const {_id} = req.query
   
-    const comp = await recordService.deleteRecord(_id);
+const comp = await recordService.deleteRecord(_id);
+  res.status(httpStatus.CREATED).send(comp);
+  };
+
+  const editRecord = async (req, res) => {
+    const comp = await recordService.editRecord(req.body);
    console.log(comp,'comp');
   res.status(httpStatus.CREATED).send(comp);
   };
+
 
   const getAllRecords = async (req, res) => {
     comp = await recordService.getAllRecords()
@@ -35,6 +55,7 @@ const deleteRecord = async (req, res) => {
 module.exports = {
     createNewRecord,
     deleteRecord,
-    getAllRecords
+    getAllRecords,
+    editRecord,
   
 };

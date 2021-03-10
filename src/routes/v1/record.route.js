@@ -5,8 +5,7 @@ const router = express.Router();
 
 router.post('/createnewrecord', recordController.createNewRecord);
 router.get('/allrecords', recordController.getAllRecords);
-// router.get('/searchcompanies', companyController.searchCompanies);//pass in search paramter
-// router.put('/editcompany', companyController.editCompany);  // 
+router.put('/editcompany', recordController.editRecord);  // 
 router.delete('/deleterecord', recordController.deleteRecord);  // 
 
 

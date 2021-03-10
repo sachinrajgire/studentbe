@@ -1,5 +1,5 @@
 const httpStatus = require('http-status');
-const {companyService } = require('../services');
+const {companyService, recordService } = require('../services');
 
 const createNewCompany = async (req, res) => {
   const comp = await companyService.createNewCompany(req.body);
@@ -10,6 +10,7 @@ res.status(httpStatus.CREATED).send(comp);
 const deleteCompany = async (req, res) => {
 const {_id} = req.query
 
+const deletedRecs = await recordService.deleteManyByCompanyId(_id);
 const comp = await companyService.deleteCompany(_id);
 console.log(comp,'comp');
 res.status(httpStatus.CREATED).send(comp);
