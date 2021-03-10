@@ -1,58 +1,55 @@
 
 
+const { findOneAndDelete } = require('../models/company.model');
 const Company = require('../models/company.model');
 
 const createNewCompany = async (input) => {
- const {companyName} =input
-  const company = await Company.create({
-    companyName
-
-  });
+  const company = await Company.create(input);
   ;
   return company;
 };
 
+const editCompany = async (input) => {
+  console.log(input,'input');
+  try {
 
-// app.get('/recorddetails', (req, res) => {
+    const company = await Company.findOneAndUpdate({
+      _id:input._id
+    },{$set:{...input}})
+    ;
+    return company;
+  }
+  catch(e){
+    console.log(e,'ERROR');
+  }
+};
 
-//   try {
-//     let found= uuidData.filter(i=>i.Id === req.query.Id)
-//    res.send(found)
-//   }
-//   catch(error) {
-//     console.log('error', error)
-//     res.status(404).send(error)
-//   }
+const getAllCompanies = async () => {
+  const company = await Company.find({});
+  return company;
+};
 
-// })
+const deleteCompany = async (_id) => {
+  const company = await Company.findByIdAndDelete(_id)
+ 
+  return company;
+};
+
+const searchCompanies = async ({companyName}) => {
+  console.log(companyName,'companyName from SERVICE');
+  const company = await Company.find({companyName});
+  
+  return company;
+};
 
 
 
-
-
-
-
-// app.get('/dummyroute', (req, res) => {
-
-//   //if enviroement is production - send  your dummy code bacl 
-//   //if local/development is development - send  your cod ehsould be local-dummy-key
-
-//   if(process.env.NODE_ENV === 'production') {
-//     return res.send(process.env.TWILIO_API_KEY)
-//   }
-//   res.send('some dummy key availabe in local enviroment')
-
-// })
-
-// app.get('/allrecords', (req, res) => {
-//    res.send(uuidData)
-// })
-
-// app.get('/', function(req, res) {
-//   res.sendFile(path.join(__dirname + '/send.html'));
-// });
 module.exports = {
   createNewCompany,
+  getAllCompanies,
+  searchCompanies,
+  editCompany,
+  deleteCompany
    
   };
   

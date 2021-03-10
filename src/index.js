@@ -15,7 +15,7 @@ mongoose.connect(process.env.MONGODB_URL, {useNewUrlParser: true, useUnifiedTopo
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
- console.log('mongodb connected');
+ console.log('MONGO DB CONNECTED ');
 });
 
 app.use('/v1', routes);

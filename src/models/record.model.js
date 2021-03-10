@@ -2,7 +2,8 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const recordSchema = mongoose.Schema(
   {
-    companyName: { type: Schema.Types.ObjectId, ref: 'Company' },
+    company: { type: Schema.Types.ObjectId, ref: 'Company' },
+    universityName:{type: String},
   
   },
   {
