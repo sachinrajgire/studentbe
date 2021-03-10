@@ -31,9 +31,10 @@ const getAllCompanies = async () => {
 
 const deleteCompany = async (_id) => {
   const company = await Company.findByIdAndDelete(_id)
- 
   return company;
 };
+
+
 
 const searchCompanies = async ({companyName}) => {
   console.log(companyName,'companyName from SERVICE');
