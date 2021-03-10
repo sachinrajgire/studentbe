@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-var uniqueValidator = require('mongoose-unique-validator');
+// var uniqueValidator = require('mongoose-unique-validator');
 
 const companySchema = mongoose.Schema(
   {
@@ -9,6 +9,9 @@ const companySchema = mongoose.Schema(
       index: true,
       unique:true
     },
+    careerUrl: {
+      type: String,
+    },
   
   },
   {
@@ -16,7 +19,7 @@ const companySchema = mongoose.Schema(
   }
 );
 
-companySchema.plugin(uniqueValidator);
+// companySchema.plugin(uniqueValidator);
 const Company = mongoose.model('Company', companySchema);
 
 module.exports = Company;
