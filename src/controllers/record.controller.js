@@ -2,6 +2,7 @@ const httpStatus = require('http-status');
 const {recordService } = require('../services');
 const {companyService } = require('../services');
 var faker = require('faker');
+const _ = require('lodash')
 
 
 const createNewRecord = async (req, res) => {
@@ -64,7 +65,7 @@ const createNewFakeRecords = async (req, res) => {
   }
 
  
-  // -------------******
+ 
 
 
 const deleteRecord = async (req, res) => {
@@ -76,8 +77,21 @@ const comp = await recordService.deleteRecord(_id);
 const searchRecords = async (req, res) => {
 const {searchText} = req.query
 const comp = await recordService.searchRecords(searchText);
-  res.status(httpStatus.CREATED).send(comp);
+const compRec = await companyService.searchCompaniesByKeyWord(searchText);
+console.log(compRec);
+const accumulateIds =compRec.map(i=>i._id)
+console.log(accumulateIds);
+const recsWithKw = await recordService.getRecordsByCompanyId(accumulateIds);
+const mergeRec=[...comp,...recsWithKw]
+console.log(mergeRec,'mergeRec');
+const deDupValue=_.uniqBy(mergeRec,'_id')
+console.log(deDupValue,'deDupValue');
+res.status(httpStatus.CREATED).send(deDupValue);
   };
+
+
+
+
 
   const editRecord = async (req, res) => {
     const comp = await recordService.editRecord(req.body);
@@ -90,12 +104,14 @@ const comp = await recordService.searchRecords(searchText);
     comp = await recordService.getAllRecords()
     res.status(httpStatus.CREATED).send(comp);
  } 
-//   const getAllRecords = async (req, res) => {
-//     let query = req.query
-//     console.log(query);
-//     comp = await recordService.getAllRecords()
-//     res.status(httpStatus.CREATED).send(comp);
-//  } 
+
+  const getPaginatedRecords = async (req, res) => {
+    console.log('I am in Paginated controller');
+    let { next_cursor = null, limit = 25}= req.query
+    comp = await recordService.getPaginatedRecords({next_cursor,limit})
+    console.log(comp.length,'comp.length');
+    res.status(httpStatus.CREATED).send(comp);
+ } 
 
  
 
@@ -106,5 +122,6 @@ module.exports = {
     editRecord,
     createNewFakeRecords,
     searchRecords,
+    getPaginatedRecords
   
 };

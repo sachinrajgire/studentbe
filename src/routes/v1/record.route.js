@@ -9,7 +9,9 @@ router.get('/allrecords', recordController.getAllRecords);
 router.get('/search', recordController.searchRecords);
 router.put('/editcompany', recordController.editRecord);  // 
 router.delete('/deleterecord', recordController.deleteRecord);  // 
-router.post('/createnewfakerecords', recordController.createNewFakeRecords); 
+router.post('/createnewfakerecords', recordController.createNewFakeRecords);
+router.get('/getpaginatedrecords', recordController.getPaginatedRecords);
+// router.post('/getpaginatedrecords/:next_cursor/:limit', recordController.createNewFakeRecords);
 
 
 

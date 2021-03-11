@@ -27,21 +27,14 @@ const searchRecords = async (searchText) => {
     {specialization :{$regex: regex}},
 ]
 })
+.populate('company',['companyName','careerUrl'])
+.limit(25)
 
 
-  console.log(rec,'rec');
    return rec;
   
 };
 
-
-// const getAllRecords = async () => {
-//   const com = await Record
-//   .find({})
-//   .populate('company',['companyName','careerUrl'])
-  
-//   return com;
-// };
 
 const getAllRecords = async () => {
   const com = await Record
@@ -49,6 +42,30 @@ const getAllRecords = async () => {
   .populate('company',['companyName','careerUrl'])
   
   return com;
+};
+
+const getPaginatedRecords = async ({next_cursor,limit=25}) => {
+console.log(next_cursor,limit,'nextcursor');
+  let com
+if(next_cursor === 'null') {
+  console.log('I am in IF LOOP');
+   com = await Record
+  .find({})
+  .populate('company',['companyName','careerUrl'])
+  .limit(limit)
+  return com 
+}
+
+else {
+  console.log('I am in ELSE LOOP');
+  com = await Record
+  .find({ _id: { $gt: next_cursor } })
+  .populate('company',['companyName','careerUrl'])
+  .limit(limit)
+}
+  
+  
+  return com
 };
 
 const editRecord = async (input) => {
@@ -71,6 +88,14 @@ const deleteManyByCompanyId = async (_id) => {
   const deleted = await Record.deleteMany({company:_id})
   return deleted;
 };
+const getRecordsByCompanyId = async (ids) => {
+
+  const records = await Record
+  .find({ 'company': { $in: ids } })
+  .populate('company',['companyName','careerUrl'])
+  console.log(records,'RECORDS FROM GET RECORDS BY COMPANY ID');
+  return records;
+};
 
 module.exports = {
     createNewRecord,
@@ -78,7 +103,9 @@ module.exports = {
     getAllRecords,
     editRecord,
     deleteManyByCompanyId,
-    searchRecords
+    searchRecords,
+    getPaginatedRecords,
+    getRecordsByCompanyId
 
    
   };
