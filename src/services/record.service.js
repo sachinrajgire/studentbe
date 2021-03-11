@@ -13,6 +13,36 @@ const deleteRecord = async (_id) => {
   return rec;
 };
 
+
+const searchRecords = async (searchText) => {
+  console.log(searchText,'searchText');
+
+  const regex = new RegExp(searchText,'gmi')
+
+  const rec = await Record.find(
+    {$or:
+  [
+    {jobTitle :{$regex: regex}},
+    {universityName :{$regex: regex}},
+    {specialization :{$regex: regex}},
+]
+})
+
+
+  console.log(rec,'rec');
+   return rec;
+  
+};
+
+
+// const getAllRecords = async () => {
+//   const com = await Record
+//   .find({})
+//   .populate('company',['companyName','careerUrl'])
+  
+//   return com;
+// };
+
 const getAllRecords = async () => {
   const com = await Record
   .find({})
@@ -47,7 +77,8 @@ module.exports = {
     deleteRecord,
     getAllRecords,
     editRecord,
-    deleteManyByCompanyId
+    deleteManyByCompanyId,
+    searchRecords
 
    
   };
