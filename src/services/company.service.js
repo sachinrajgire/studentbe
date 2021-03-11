@@ -34,6 +34,22 @@ const deleteCompany = async (_id) => {
   return company;
 };
 
+const searchCompaniesByKeyWord = async (searchText) => {
+
+  const regex = new RegExp(searchText,'gmi')
+
+  const comp = await Company.find(
+    {$or:
+  [
+    {companyName :{$regex: regex}},
+    {careerUrl :{$regex: regex}},
+]
+})
+
+  console.log(comp,'comp');
+   return comp;
+  
+};
 
 
 const searchCompanies = async ({companyName}) => {
@@ -50,7 +66,9 @@ module.exports = {
   getAllCompanies,
   searchCompanies,
   editCompany,
-  deleteCompany
+  deleteCompany,
+  searchCompanies,
+  searchCompaniesByKeyWord,
    
   };
   
