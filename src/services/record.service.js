@@ -4,6 +4,7 @@ const Record = require('../models/record.model');
 
 const createNewRecord = async (input) => {
 //  const {companyName,universityName} =input
+console.log(input,'input');
   const rec = await Record.create(input);
   return rec;
 };
@@ -39,6 +40,14 @@ const searchRecords = async (searchText) => {
 const getAllRecords = async () => {
   const com = await Record
   .find({})
+  .populate('company',['companyName','careerUrl'])
+  
+  return com;
+};
+
+const getRecordById = async (Id) => {
+  const com = await Record
+  .find({_id:Id})
   .populate('company',['companyName','careerUrl'])
   
   return com;
@@ -105,7 +114,8 @@ module.exports = {
     deleteManyByCompanyId,
     searchRecords,
     getPaginatedRecords,
-    getRecordsByCompanyId
+    getRecordsByCompanyId,
+    getRecordById,
 
    
   };
