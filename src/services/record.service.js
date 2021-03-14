@@ -40,6 +40,7 @@ const searchRecords = async (searchText) => {
 const getAllRecords = async () => {
   const com = await Record
   .find({})
+  .sort({_id:-1})
   .populate('company',['companyName','careerUrl'])
   
   return com;
@@ -60,6 +61,7 @@ if(next_cursor === 'null') {
   console.log('I am in IF LOOP');
    com = await Record
   .find({})
+  .sort({_id:-1})
   .populate('company',['companyName','careerUrl'])
   .limit(limit)
   return com 
@@ -69,6 +71,7 @@ else {
   console.log('I am in ELSE LOOP');
   com = await Record
   .find({ _id: { $gt: next_cursor } })
+  .sort({_id:-1})
   .populate('company',['companyName','careerUrl'])
   .limit(limit)
 }
