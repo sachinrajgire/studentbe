@@ -30,10 +30,17 @@ const getAllCompanies = async (req, res) => {
 const searchCompanies = async (req, res) => {
   console.log(req.query,'RES.QUERY')
   const {keyword} = req.query
-  comp = await companyService.searchCompanies({companyName:keyword})
+  comp = await companyService.searchCompanies(keyword)
   res.status(httpStatus.CREATED).send(comp);
   console.log(comp,'comp');
 
+};
+
+const getCompanyById = async (req, res) => {
+  const query= req.query
+  const comp = await companyService.getCompanyById(query.Id);
+ console.log(comp,'comp');
+res.status(httpStatus.CREATED).send(comp[0]);
 };
 
 
@@ -42,6 +49,7 @@ module.exports = {
   getAllCompanies,
   searchCompanies,
   editCompany,
-  deleteCompany
+  deleteCompany,
+  getCompanyById
   
 };
