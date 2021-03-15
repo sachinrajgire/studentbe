@@ -10,6 +10,8 @@ router.get('/allcompanies', companyController.getAllCompanies);
 router.get('/searchcompanies', companyController.searchCompanies);//pass in search paramter
 router.put('/editcompany', companyController.editCompany);  // 
 router.delete('/deletecompany', companyController.deleteCompany);  // 
+router.get('/getcompanybyid', companyController.getCompanyById);
+
 
 
 

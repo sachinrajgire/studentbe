@@ -6,35 +6,10 @@ const _ = require('lodash')
 
 
 const createNewRecord = async (req, res) => {
-  console.log(req.body,'req.body');
-const {companyName,careerUrl,universityName, graduationDate,
-  specialization,jobTitle,jobStartDate} 
-  =req.body
+    const rec = await recordService.createNewRecord(req.body);
+     res.status(httpStatus.CREATED).send(rec);
+  }
 
-const companyInput ={
-  companyName,
-  careerUrl
-}
-let recordInput ={
-    universityName,
-    graduationDate,
-    specialization,
-    jobTitle,
-    jobStartDate
-}
-  const doCompanyExist= await companyService.searchCompanies({companyName});
-let newRecordInput
-if(doCompanyExist.length>0){
-  newRecordInput={...recordInput,company:doCompanyExist[0]._id}
-}
-else {
-  const comp = await companyService.createNewCompany(companyInput);
-  newRecordInput={...recordInput,company:comp._id}
-}
-
-const rec = await recordService.createNewRecord(newRecordInput);
-res.status(httpStatus.CREATED).send(rec);
-};
 
 /////////////************************************************** */
 const createNewFakeRecords = async (req, res) => {
