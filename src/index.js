@@ -20,7 +20,7 @@ db.once('open', function() {
 
 app.use('/v1', routes);
 
-
+console.log(`Hello all`)
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
