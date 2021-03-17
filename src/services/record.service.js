@@ -132,7 +132,7 @@ module.exports = {
     getRecordsByCompanyId,
     getRecordById,
     getJobTitle,
-    getJobTitleCount,
+   
 
    
   };
