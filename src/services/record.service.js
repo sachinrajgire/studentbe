@@ -46,6 +46,18 @@ const getAllRecords = async () => {
   return com;
 };
 
+
+const getJobTitle = async () => {
+  const title = await Record
+  .find({}, 'jobTitle')
+  // .populate(count)
+  console.log(title)
+  return title;
+};
+
+
+
+
 const getRecordById = async (Id) => {
   const com = await Record
   .find({_id:Id})
@@ -119,6 +131,8 @@ module.exports = {
     getPaginatedRecords,
     getRecordsByCompanyId,
     getRecordById,
+    getJobTitle,
+    getJobTitleCount,
 
    
   };

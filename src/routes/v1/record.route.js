@@ -12,6 +12,7 @@ router.delete('/deleterecord', recordController.deleteRecord);  //
 router.post('/createnewfakerecords', recordController.createNewFakeRecords);
 router.get('/getpaginatedrecords', recordController.getPaginatedRecords);
 router.get('/getrecordbyid', recordController.getRecordById);
+router.get('/getjobtitle', recordController.getJobTitle);
 // router.post('/getpaginatedrecords/:next_cursor/:limit', recordController.createNewFakeRecords);
 
 

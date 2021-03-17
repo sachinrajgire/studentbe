@@ -89,6 +89,11 @@ res.status(httpStatus.CREATED).send(deDupValue);
     res.status(httpStatus.CREATED).send(comp);
  } 
 
+ const getJobTitle = async (req, res) => {
+  title = await recordService.getJobTitle()
+  res.status(httpStatus.CREATED).send(title);
+} 
+
   const getPaginatedRecords = async (req, res) => {
     console.log('I am in Paginated controller');
     let { next_cursor = null, limit = 25}= req.query
@@ -108,5 +113,6 @@ module.exports = {
     searchRecords,
     getPaginatedRecords,
     getRecordById,
+    getJobTitle
   
 };
