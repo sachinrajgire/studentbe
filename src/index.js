@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const port = process.env.PORT || 4000
+const port = process.env.PORT || 4001
 var cors = require('cors')
 var path = require('path');
 var bodyParser = require('body-parser')
@@ -25,5 +25,4 @@ app.use('/v1', routes);
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })
-
 
