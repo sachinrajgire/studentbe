@@ -1,6 +1,5 @@
 
 
-const { findOneAndDelete } = require('../models/company.model');
 const Company = require('../models/company.model');
 
 const createNewCompany = async (input) => {
