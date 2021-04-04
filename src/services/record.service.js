@@ -4,7 +4,6 @@ const Record = require('../models/record.model');
 
 const createNewRecord = async (input) => {
 //  const {companyName,universityName} =input
-console.log(input,'input');
   const rec = await Record.create(input);
   return rec;
 };
@@ -16,7 +15,6 @@ const deleteRecord = async (_id) => {
 
 
 const searchRecords = async (searchText) => {
-  console.log(searchText,'searchText');
 
   const regex = new RegExp(searchText,'gmi')
 
@@ -55,10 +53,8 @@ const getRecordById = async (Id) => {
 };
 
 const getPaginatedRecords = async ({next_cursor,limit=25}) => {
-console.log(next_cursor,limit,'nextcursor');
   let com
 if(next_cursor === 'null') {
-  console.log('I am in IF LOOP');
    com = await Record
   .find({})
   .sort({_id:-1})
@@ -68,7 +64,6 @@ if(next_cursor === 'null') {
 }
 
 else {
-  console.log('I am in ELSE LOOP');
   com = await Record
   .find({ _id: { $gt: next_cursor } })
   .sort({_id:-1})
@@ -81,18 +76,15 @@ else {
 };
 
 const editRecord = async (input) => {
-  console.log(input,'input');
   try {
 
     const record = await Record.findOneAndUpdate({
       _id:input._id
     },{$set:{...input}})
     ;
-    console.log(record,'record');
     return record;
   }
   catch(e){
-    console.log(e,'ERROR');
   }
 };
 
@@ -105,7 +97,6 @@ const getRecordsByCompanyId = async (ids) => {
   const records = await Record
   .find({ 'company': { $in: ids } })
   .populate('company',['companyName','careerUrl'])
-  console.log(records,'RECORDS FROM GET RECORDS BY COMPANY ID');
   return records;
 };
 

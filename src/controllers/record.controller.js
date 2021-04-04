@@ -15,9 +15,9 @@ const createNewRecord = async (req, res) => {
 const createNewFakeRecords = async (req, res) => {
 
   for (let i =0 ;i <10 ;i++) {
-    console.log(i,'IIIIIIII')
+    // console.log(i,'IIIIIIII')
 
-    console.log('I am in createfake records');
+    // console.log('I am in createfake records');
     let companyInput ={
       companyName:faker.company.companyName(),
       careerUrl:faker.internet.url(),
@@ -70,16 +70,13 @@ res.status(httpStatus.CREATED).send(deDupValue);
 
 
   const editRecord = async (req, res) => {
-    console.log(req.body,'req.body');
     const comp = await recordService.editRecord(req.body);
-   console.log(comp,'comp');
   res.status(httpStatus.CREATED).send(comp);
   };
 
   const getRecordById = async (req, res) => {
     const query= req.query
     const comp = await recordService.getRecordById(query.Id);
-   console.log(comp,'comp');
   res.status(httpStatus.CREATED).send(comp[0]);
   };
 
@@ -90,10 +87,8 @@ res.status(httpStatus.CREATED).send(deDupValue);
  } 
 
   const getPaginatedRecords = async (req, res) => {
-    console.log('I am in Paginated controller');
     let { next_cursor = null, limit = 25}= req.query
     comp = await recordService.getPaginatedRecords({next_cursor,limit})
-    console.log(comp.length,'comp.length');
     res.status(httpStatus.CREATED).send(comp);
  } 
 

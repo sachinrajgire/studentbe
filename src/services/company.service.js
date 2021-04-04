@@ -10,7 +10,6 @@ const createNewCompany = async (input) => {
 };
 
 const editCompany = async (input) => {
-  console.log(input,'input');
   try {
 
     const company = await Company.findOneAndUpdate({
@@ -45,15 +44,12 @@ const searchCompaniesByKeyWord = async (searchText) => {
     {careerUrl :{$regex: regex}},
 ]
 })
-
-  console.log(comp,'comp');
    return comp;
   
 };
 
 
 const searchCompanies = async (keyword) => {
-  console.log(keyword,'keyword from SERVICE');
   const regex = new RegExp(keyword,'gmi')
   const company = await Company.find(
     {$or:
@@ -62,16 +58,12 @@ const searchCompanies = async (keyword) => {
     {careerUrl :{$regex: regex}},
 ]
 })
-  console.log(company,'company');
-  
   return company;
 };
 
 const getCompanyById = async (Id) => {
   const com = await Company
   .find({_id:Id})
-  
-  
   return com;
 };
 
