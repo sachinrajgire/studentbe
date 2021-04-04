@@ -60,7 +60,7 @@ const accumulateIds =compRec.map(i=>i._id)
 const recsWithKw = await recordService.getRecordsByCompanyId(accumulateIds);
 const mergeRec=[...comp,...recsWithKw]
 // console.log(mergeRec,'mergeRec');
-const deDupValue=_.uniqBy(mergeRec,'_id')
+const deDupValue=_.uniqBy(mergeRec,(_id) => _id.toString())
 // console.log(deDupValue,'deDupValue');
 res.status(httpStatus.CREATED).send(deDupValue);
   };
