@@ -88,7 +88,8 @@ res.status(httpStatus.CREATED).send(deDupValue);
 
   const getPaginatedRecords = async (req, res) => {
     let { next_cursor = null, limit = 25}= req.query
-    comp = await recordService.getPaginatedRecords({next_cursor,limit})
+
+    let comp = await recordService.getPaginatedRecords({next_cursor,limit})
     res.status(httpStatus.CREATED).send(comp);
  } 
 

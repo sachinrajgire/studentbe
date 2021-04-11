@@ -57,7 +57,6 @@ const getPaginatedRecords = async ({next_cursor,limit=25}) => {
 if(next_cursor === 'null') {
    com = await Record
   .find({})
-  .sort({_id:-1})
   .populate('company',['companyName','careerUrl'])
   .limit(limit)
   return com 
@@ -66,12 +65,12 @@ if(next_cursor === 'null') {
 else {
   com = await Record
   .find({ _id: { $gt: next_cursor } })
-  .sort({_id:-1})
   .populate('company',['companyName','careerUrl'])
   .limit(limit)
+
 }
   
-  
+  // console.log(com,'record service getpaginatedrecrds');
   return com
 };
 
