@@ -30,18 +30,12 @@ const createNewFakeRecords = async (req, res) => {
         jobStartDate:faker.date.past()
     }
   
-    
-  
    const comp = await companyService.createNewCompany(companyInput);
           newRecordInput={...recordInput,company:comp._id}
-        
         const rec = await recordService.createNewRecord(newRecordInput);
   
   };
   }
-
- 
- 
 
 
 const deleteRecord = async (req, res) => {
