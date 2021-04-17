@@ -32,7 +32,7 @@ const comp = await sponsorService.deleteSponsor(_id);
   const getAllSponsors = async (req, res) => {
     comp = await sponsorService.getAllSponsors()
     res.status(httpStatus.CREATED).send(comp);
- } 
+ }  
 
 
 module.exports = {

@@ -3,8 +3,16 @@
 const Sponsor = require('../models/sponsor.model');
 
 const createNewSponsor = async (input) => {
-  const rec = await Sponsor.create(input);
-  return rec;
+  console.log(input,'input');
+  try {
+    const rec = await Sponsor.create(input);
+    console.log(rec,'REC ');
+  }
+  catch(e){
+    console.log(e,'ERROR ');
+    return rec;
+  }
+  
 };
 
 const deleteSponsor = async (_id) => {
