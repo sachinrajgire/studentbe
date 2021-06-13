@@ -1,11 +1,13 @@
 
 const companyService  = require('./company.service');
 const recordService = require('./record.service');
-const sponsorService = require('./sponsor.service');
+const studentRecordService = require('./studentRecord.service');
+const homeworkService = require('./homework.service');
 
 module.exports ={
  companyService,
  recordService,
- sponsorService
+ studentRecordService,
+ homeworkService
 }
 
