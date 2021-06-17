@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const recordSchema = mongoose.Schema(
+const statsSchema = mongoose.Schema(
   {
     company: { type: Schema.Types.ObjectId, ref: 'Company' },
     isApproved:{type: Boolean,default:false},
@@ -16,11 +16,10 @@ const recordSchema = mongoose.Schema(
 );
 
 
-const Record = mongoose.model('Record', recordSchema);
 
+const Stats = mongoose.model('Stats', statsSchema);
 
-
-module.exports = Record;
+module.exports = Stats;
 
 
 
