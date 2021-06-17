@@ -87,6 +87,16 @@ res.status(httpStatus.CREATED).send(deDupValue);
     res.status(httpStatus.CREATED).send(comp);
  } 
 
+ const getRecordCloud = async (req, res) => {
+
+    let records = await recordService.getAllRecords();
+    res.status(httpStatus.CREATED).send(records);
+
+    const jobTitleArr = records.map(i => i.jobTitle);
+
+    console.log(jobTitleArr);
+
+ }
  
 
 module.exports = {
@@ -98,5 +108,5 @@ module.exports = {
     searchRecords,
     getPaginatedRecords,
     getRecordById,
-  
+    getRecordCloud
 };
