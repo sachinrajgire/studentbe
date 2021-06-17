@@ -90,12 +90,24 @@ res.status(httpStatus.CREATED).send(deDupValue);
  const getRecordCloud = async (req, res) => {
 
     let records = await recordService.getAllRecords();
-    res.status(httpStatus.CREATED).send(records);
 
     const jobTitleArr = records.map(i => i.jobTitle);
 
-    console.log(jobTitleArr);
+    let str = jobTitleArr.toString();
+    let wordArr = str.split(/[ ,]+/);
+   
+    function getWordCount(wordArr) {
+      let map = {};
+      for(let i = 0; i < wordArr.length; i++) {
+        let word = wordArr[i];
+        map[word] = (map[word] + 1) || 1;
+      }
+      return map;
+    } 
 
+    let result = getWordCount(wordArr);
+
+    res.status(httpStatus.CREATED).send(result);
  }
  
 
