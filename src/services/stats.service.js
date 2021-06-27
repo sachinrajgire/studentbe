@@ -1,7 +1,4 @@
-
-
 const Record = require('../models/record.model');
-
 
 const getAllRecords = async () => {
   const com = await Record
@@ -39,9 +36,17 @@ const getAllRecords = async () => {
   return slicedArray;
 };
 
+const getAllJobRecords = async () => {
+  const com = await Record
+  .find({})
+  .sort({_id:-1})
+  .populate('company',['companyName','careerUrl'])
+  
+  return com;
+};
 
 module.exports = {
 
   getAllRecords,
-
+  getAllJobRecords
 };
