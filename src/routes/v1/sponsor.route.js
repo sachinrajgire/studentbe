@@ -8,6 +8,7 @@ router.get('/allsponsors', sponsorController.getAllSponsors);
 router.put('/editsponsor', sponsorController.editSponsor);  // 
 router.delete('/deletesponsor', sponsorController.deleteSponsor);  // 
 router.get('/getsponsorbyid', sponsorController.getSponsorById);
+router.get('/getsponsorbyid1', sponsorController.getSponsorById);
 
 
 
